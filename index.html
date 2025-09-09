@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대한민국 신재생에너지 현황</title>
+    <title>대한민국 신재생에너지 포트폴리오</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,357 +12,328 @@
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f0f9ff;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
         }
         .chart-container {
             position: relative;
             width: 100%;
+            max-width: 800px;
             height: 400px;
+            margin: 0 auto;
         }
-        .kpi-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            text-align: center;
-        }
-        .kpi-value {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: #005F73;
-        }
-        .kpi-label {
-            font-size: 1rem;
-            color: #0A9396;
-            margin-top: 0.5rem;
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-    <header class="bg-white shadow-md sticky top-0 z-10">
-        <div class="container mx-auto px-6 py-4">
-            <h1 class="text-3xl font-bold text-[#005F73]">대한민국 신재생에너지 포트폴리오</h1>
-            <p class="text-md text-gray-600">2020-2024년 설치 및 이용 현황 중심 분석</p>
+    <header class="bg-white shadow-md py-4 mb-8">
+        <div class="container">
+            <h1 class="text-3xl font-bold text-center">대한민국 신재생에너지 현황 포트폴리오</h1>
         </div>
     </header>
 
-    <main class="container mx-auto p-6 space-y-12">
-
-        <section id="overview">
-            <h2 class="text-2xl font-bold mb-4 border-l-4 border-[#005F73] pl-4">1. 전국 개요</h2>
-            <p class="mb-8 text-gray-600">
-                2024년 기준, 대한민국의 신재생에너지 설비는 꾸준히 증가하고 있으며, 특히 태양광 에너지의 성장이 두드러집니다. 전체적인 발전량 또한 지속적인 상승 추세를 보이며 에너지 전환의 가능성을 보여주고 있습니다.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="kpi-card">
-                    <div class="kpi-value">3.95 GW</div>
-                    <div class="kpi-label">풍력 및 태양광 총 설치용량 (2024)</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">63,192 GWh</div>
-                    <div class="kpi-label">신재생에너지 총 발전량 (2024)</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">185% ▲</div>
-                    <div class="kpi-label">태양광 설치용량 증가 (2020년 대비)</div>
-                </div>
+    <main class="container">
+        
+        <section class="mb-12">
+            <h2 class="section-title">0. 범위·정의·방법론</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">0.1 신재생에너지란?</h3>
+                <p class="mb-4">신재생에너지는 재생에너지와 신에너지를 아우르는 개념입니다. 재생에너지는 햇빛, 물, 바람, 지열 등 자연에서 얻을 수 있는 에너지로 고갈되지 않고 친환경적입니다. 신에너지는 기존 화석연료를 변환하거나 새로운 방식으로 얻어내는 에너지입니다. 기후변화 위기에 대응하고 지속가능한 사회를 만들기 위해 신재생에너지로의 전환은 필수적입니다.</p>
+                <h3 class="text-xl font-bold mb-2">0.2 대상 에너지원</h3>
+                <ul class="list-disc list-inside mb-4">
+                    <li>**풍력**: 육상/해상으로 구분</li>
+                    <li>**수력**: 일반 수력 및 양수 발전으로 구분</li>
+                    <li>**태양광**: 태양광 발전 (제공된 데이터에서 태양열과 태양광이 혼용되어 태양광 기준으로 작성)</li>
+                    <li>**데이터 기간**: 2020년 ~ 2024년</li>
+                </ul>
+                <h3 class="text-xl font-bold mb-2">0.3 지표 단위 및 데이터 출처</h3>
+                <ul class="list-disc list-inside">
+                    <li>**설비용량**: kW (킬로와트)</li>
+                    <li>**발전량**: MWh (메가와트시)</li>
+                    <li>**데이터 출처**: 신재생에너지 현황 목록 (한국에너지공단), HOME 발전·판매 발전량 에너지원별 (전력통계정보시스템)</li>
+                </ul>
             </div>
+        </section>
 
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-bold mb-4 text-center">주요 에너지원 설치 및 발전량 추이 (2020-2024)</h3>
-                <div class="chart-container h-96 md:h-[450px]">
+        <section class="mb-12">
+            <h2 class="section-title">1. 기후변화와 신재생에너지의 필요성</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <p>최근 기록적인 여름 폭염과 국지성 호우는 지구 평균 기온 상승이 낳은 이상 기상 현상입니다. 기후변화에 관한 정부간 협의체(IPCC)의 보고서에 따르면, 모든 시나리오에서 2040년까지 지구 평균 기온은 과거 평년보다 약 1℃ 상승할 것으로 전망됩니다. 이는 올여름과 같은 폭염이 일상화될 수 있음을 의미하며, 전력 수요 급증으로 인한 대규모 정전 사태의 위험을 증가시킵니다.</p>
+                <p class="mt-4">이러한 기후변화에 대응하고 안정적인 에너지 수급을 위해 온실가스 배출량을 줄이는 신재생에너지의 확대가 시급합니다.</p>
+            </div>
+        </section>
+        
+        <section class="mb-12">
+            <h2 class="section-title">2. 전국 개요 (설치·이용)</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-4">2.1 전국 현황 요약</h3>
+                <div class="overflow-x-auto mb-6">
+                    <h4 class="font-bold mb-2">표 2-1: 전국 에너지원별 설치현황 요약 (2024년)</h4>
+                    <table class="w-full text-sm text-left text-gray-700 border-collapse">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="py-3 px-6">발전원</th>
+                                <th scope="col" class="py-3 px-6">개수</th>
+                                <th scope="col" class="py-3 px-6">용량 (kW)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b">
+                                <td class="py-4 px-6">풍력</td>
+                                <td class="py-4 px-6">2,751</td>
+                                <td class="py-4 px-6">1,440,782</td>
+                            </tr>
+                            <tr class="bg-gray-50 border-b">
+                                <td class="py-4 px-6">태양광</td>
+                                <td class="py-4 px-6">32,854</td>
+                                <td class="py-4 px-6">2,512,189</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="py-4 px-6">수력</td>
+                                <td class="py-4 px-6">413</td>
+                                <td class="py-4 px-6">473,083</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="overflow-x-auto mb-6">
+                    <h4 class="font-bold mb-2">표 2-2: 전국 에너지원별 이용현황 요약 (2024년)</h4>
+                    <table class="w-full text-sm text-left text-gray-700 border-collapse">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="py-3 px-6">발전원</th>
+                                <th scope="col" class="py-3 px-6">총 발전량 (MWh)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b">
+                                <td class="py-4 px-6">수력</td>
+                                <td class="py-4 px-6">4,300,313</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="py-4 px-6">신재생에너지 총계</td>
+                                <td class="py-4 px-6">63,192,561</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="text-xl font-bold mb-4">2.2 연도별 추이</h3>
+                <p class="mb-4">2020년부터 2024년까지 태양광 설치 용량은 지속적으로 증가했으며, 신재생에너지 전체 발전량 또한 꾸준한 증가 추세를 보였습니다. 아래 그래프는 태양광 설치 용량의 폭발적인 증가가 전체 신재생에너지 발전량 증가를 견인하고 있음을 보여줍니다.</p>
+                <div class="chart-container">
                     <canvas id="trendsChart"></canvas>
                 </div>
-                <p class="text-sm text-center text-gray-500 mt-4">좌측 축은 설치용량(kW), 우측 축은 발전량(MWh)을 나타냅니다. 태양광 설치용량이 급격히 증가하는 동안 전체 신재생에너지 발전량도 꾸준히 상승했습니다.</p>
             </div>
         </section>
 
-        <section id="regional">
-            <h2 class="text-2xl font-bold mb-4 border-l-4 border-[#005F73] pl-4">2. 지역별 분석</h2>
-            <p class="mb-8 text-gray-600">
-                신재생에너지 보급은 지역별 특성에 따라 다르게 나타납니다. 풍력 발전은 바람이 강한 해안 지역에, 태양광 발전은 넓은 부지 확보가 용이한 지역에 집중되는 경향을 보입니다.
-            </p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold mb-4 text-center">시도별 풍력 설치용량 (2024년)</h3>
-                    <div class="chart-container h-96">
-                        <canvas id="windBarChart"></canvas>
-                    </div>
-                     <p class="text-sm text-center text-gray-500 mt-4">경상북도, 경상남도, 제주도가 풍력 발전 설비를 주도하고 있습니다.</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold mb-4 text-center">시도별 태양광 설치용량 (2024년)</h3>
-                    <div class="chart-container h-96">
-                        <canvas id="solarBarChart"></canvas>
-                    </div>
-                    <p class="text-sm text-center text-gray-500 mt-4">충청남도가 압도적인 1위를 차지했으며, 경상북도와 전라북도가 뒤를 잇고 있습니다.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="deepdive">
-            <h2 class="text-2xl font-bold mb-4 border-l-4 border-[#005F73] pl-4">3. 에너지원별 심층 분석</h2>
-            <p class="mb-8 text-gray-600">
-                각 에너지원은 고유한 특성과 잠재력을 가지고 있습니다. 풍력과 태양광은 설치 용량 면에서, 수력은 안정적인 발전량 면에서 중요한 역할을 담당합니다.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
-                    <h3 class="text-xl font-bold mb-2">🌬️ 풍력 에너지</h3>
-                    <p class="text-center text-gray-600 mb-4">전년 대비 10.3% 증가하며 꾸준한 성장세를 보입니다. 주요 설비는 해안 지역에 집중되어 있습니다.</p>
-                    <div class="chart-container w-48 h-48 my-4">
-                        <canvas id="windDonutChart"></canvas>
-                    </div>
-                    <p class="text-sm font-bold text-center">상위 3개 지역이 전체 용량의 약 44%를 차지합니다.</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
-                    <h3 class="text-xl font-bold mb-2">☀️ 태양광 에너지</h3>
-                    <p class="text-center text-gray-600 mb-4">가장 빠른 속도로 보급이 확대되고 있는 핵심 에너지원입니다. 2020년 이후 폭발적인 성장을 기록했습니다.</p>
-                    <div class="chart-container w-48 h-48 my-4">
-                        <canvas id="solarDonutChart"></canvas>
-                    </div>
-                     <p class="text-sm font-bold text-center">상위 3개 지역이 전체 용량의 약 69%를 차지하며 높은 집중도를 보입니다.</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
-                    <h3 class="text-xl font-bold mb-2">💧 수력 에너지</h3>
-                    <p class="text-center text-gray-600 mb-4">오랜 기간 안정적으로 전력을 공급해 온 기반 에너지원입니다. 2024년에도 상당한 발전량을 기록했습니다.</p>
-                    <div class="flex-grow flex items-center justify-center">
-                         <div class="text-center">
-                            <div class="kpi-value text-4xl">4,300 GWh</div>
-                            <div class="kpi-label text-lg">2024년 총 발전량</div>
+        <section class="mb-12">
+            <h2 class="section-title">3. 지역 분석 (시도별)</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-4">3.1 시도별 현황</h3>
+                <p class="mb-4">2024년 기준, 풍력과 태양광의 설치 용량은 특정 시도에 집중되어 있습니다.</p>
+                <ul class="list-disc list-inside space-y-2 mb-6">
+                    <li>**풍력 설치 용량 상위 TOP 3 지역 (2024년)**: 경상북도 (288,095 kW), 경상남도 (198,395 kW), 제주특별자치도 (153,680 kW)</li>
+                    <li>**태양광 설치 용량 상위 TOP 3 지역 (2024년)**: 충청남도 (757,860 kW), 경상북도 (512,504 kW), 전라북도 (486,012 kW)</li>
+                </ul>
+                <h3 class="text-xl font-bold mb-4">3.2 지도 시각화</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-center mb-2">풍력 설치 현황</h4>
+                        <div class="chart-container">
+                            <canvas id="windBarChart"></canvas>
                         </div>
+                        <p class="mt-2 text-sm text-center text-gray-600">풍력 발전소가 경상도와 제주 등 해안 지역에 집중되어 있음을 보여줍니다.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-center mb-2">태양광 설치 현황</h4>
+                        <div class="chart-container">
+                            <canvas id="solarBarChart"></canvas>
+                        </div>
+                        <p class="mt-2 text-sm text-center text-gray-600">태양광 발전소가 넓은 부지 확보가 용이한 지역에 집중되어 있음을 보여줍니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="insights">
-            <h2 class="text-2xl font-bold mb-4 border-l-4 border-[#005F73] pl-4">4. 종합 인사이트</h2>
-            <div class="bg-white rounded-lg shadow-md p-8 space-y-4">
-                <div class="flex items-start">
-                    <span class="text-2xl mr-4">💡</span>
-                    <div>
-                        <h3 class="font-bold text-lg">성장의 가속화, 과제는 효율성</h3>
-                        <p class="text-gray-600">태양광 설치 용량은 급증했지만, 개별 에너지원의 발전량 데이터가 없어 실제 이용 효율 분석에는 한계가 있습니다. 향후 에너지원별 발전량 추적을 통해 설치와 이용의 격차를 줄이는 노력이 필요합니다.</p>
-                    </div>
+        <section class="mb-12">
+            <h2 class="section-title">4. 에너지원별 심층 분석</h2>
+            <div class="bg-white p-6 rounded-lg shadow space-y-6">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">4.1 풍력</h3>
+                    <p><strong>설치현황</strong>: 2024년 기준 전국 총 용량 1,440,782 kW로, 전년 대비 10.3% 증가했습니다. 해상풍력은 데이터에 별도 구분되지 않았습니다.</p>
+                    <p class="mt-2"><strong>지역 분포</strong>: 경상북도와 경상남도, 제주도가 주요 풍력 발전 지역입니다.</p>
                 </div>
-                <div class="flex items-start">
-                    <span class="text-2xl mr-4">🗺️</span>
-                    <div>
-                        <h3 class="font-bold text-lg">지역별 특화된 포트폴리오</h3>
-                        <p class="text-gray-600">풍력은 경상도와 제주 등 해안권에, 태양광은 충청, 전라, 경상 등 넓은 부지를 확보할 수 있는 지역에 집중되고 있습니다. 지역별 강점을 살린 분산형 에너지 정책이 중요해 보입니다.</p>
-                    </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">4.2 수력</h3>
+                    <p><strong>설치현황</strong>: 2024년 기준 일반 수력과 양수 발전소의 총 용량은 473,083 kW입니다.</p>
+                    <p class="mt-2"><strong>이용현황</strong>: 2024년 총 발전량은 4,300,313 MWh를 기록했습니다.</p>
+                    <p class="mt-2"><strong>지역</strong>: 주요 발전소는 경기도와 강원특별자치도에 집중되어 있습니다.</p>
                 </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">4.3 태양광 (열 대신)</h3>
+                    <p><strong>설치현황</strong>: 2024년 기준 전국 총 용량 2,512,189 kW로, 2020년 대비 185% 이상 증가하며 가장 빠른 속도로 보급되고 있습니다.</p>
+                    <p class="mt-2"><strong>주의</strong>: 태양광은 열에너지를 생산하는 태양열과는 구분됩니다.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-12">
+            <h2 class="section-title">5. 결론 및 제언</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">5.1 데이터 기반의 핵심 인사이트</h3>
+                <ul class="list-disc list-inside space-y-2 mb-4">
+                    <li>**설치 vs 이용의 격차**: 태양광의 경우 설치 용량은 급증했으나, 실제 발전량은 전체 신재생에너지 발전량으로만 확인 가능해 개별적인 이용 효율 분석에 한계가 있었습니다.</li>
+                    <li>**지역별 강점**: 풍력은 해안권(경상도, 제주), 태양광은 넓은 부지 확보가 용이한 내륙(충청, 전라)에 집중되는 경향을 보였습니다.</li>
+                </ul>
+                <h3 class="text-xl font-bold mb-2">5.2 정책적 제언 및 미래 전망</h3>
+                <p>모든 기후 시나리오가 2040년까지 기온이 1℃ 이상 상승할 것으로 전망하는 만큼, 우리 사회는 고도 성장을 추구하는 SSP5 시나리오의 경로가 아닌 **지속가능한 성장 경로(SSP1-2.6)**를 선택해야 합니다. 이는 신재생에너지 기술을 빠르게 발전시켜 화석연료 사용을 최소화하고, 사회 전반에 걸쳐 환경을 우선시하는 방향으로 나아가야 함을 의미합니다. 단기적으로는 기후변화를 염두에 둔 에너지 수급 계획을 수립하고, 장기적으로는 친환경 사회로의 근본적인 전환을 위한 노력이 필요합니다.</p>
             </div>
         </section>
 
     </main>
-    
-    <footer class="bg-[#005F73] text-white mt-12 py-6 text-center">
-        <p>본 인포그래픽은 제공된 데이터를 기반으로 제작되었습니다.</p>
-        <p class="text-sm opacity-80">데이터 출처: 한국에너지공단, 전력통계정보시스템</p>
+
+    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+        <p class="text-sm">&copy; 2024. All rights reserved. | 데이터 출처: 한국에너지공단, 전력통계정보시스템</p>
     </footer>
 
-<script>
-const chartData = {
-    trends: {
-        labels: [2020, 2021, 2022, 2023, 2024],
-        capacity: {
-            wind: [1305417, 1420177, 1232729, 1306129, 1440782],
-            solar: [880499, 163529, 205329, 221799, 2512189],
-        },
-        generation: {
-            hydro: [3877229, 6737000, 5171000, 7500000, 4300313],
-            renewableTotal: [51395893, 43096000, 54101000, 56562000, 63192561],
-        }
-    },
-    regionalWind: {
-        labels: ['경상북도', '경상남도', '제주', '강원', '전라남도', '충청남도', '전라북도', '경기도', '충청북도'],
-        data: [288095, 198395, 153680, 140782, 128543, 85721, 65983, 35210, 21876]
-    },
-    regionalSolar: {
-        labels: ['충청남도', '경상북도', '전라북도', '전라남도', '강원', '경기도', '충청북도', '경상남도', '대전'],
-        data: [757860, 512504, 486012, 382191, 380091, 257401, 201278, 178023, 134298]
-    }
-};
-
-const tooltipPlugin = {
-    tooltip: {
-        callbacks: {
-            title: function(tooltipItems) {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                    return label.join(' ');
-                } else {
-                    return label;
-                }
-            }
-        }
-    }
-};
-
-function formatLabel(str) {
-    if (str.length > 16) {
-        const words = str.split(' ');
-        const lines = [];
-        let currentLine = '';
-        words.forEach(word => {
-            if ((currentLine + word).length > 16) {
-                lines.push(currentLine.trim());
-                currentLine = '';
-            }
-            currentLine += word + ' ';
-        });
-        lines.push(currentLine.trim());
-        return lines;
-    }
-    return str;
-}
-
-window.onload = function() {
-    const trendsCtx = document.getElementById('trendsChart').getContext('2d');
-    new Chart(trendsCtx, {
-        type: 'line',
-        data: {
-            labels: chartData.trends.labels,
-            datasets: [{
-                label: '풍력 설치용량(kW)',
-                data: chartData.trends.capacity.wind,
-                borderColor: '#0A9396',
-                backgroundColor: '#0A9396',
-                yAxisID: 'yCapacity',
-                tension: 0.3,
-            }, {
-                label: '태양광 설치용량(kW)',
-                data: chartData.trends.capacity.solar,
-                borderColor: '#EE9B00',
-                backgroundColor: '#EE9B00',
-                yAxisID: 'yCapacity',
-                tension: 0.3,
-            }, {
-                label: '신재생에너지 총 발전량(MWh)',
-                data: chartData.trends.generation.renewableTotal,
-                borderColor: '#AE2012',
-                backgroundColor: '#AE2012',
-                type: 'bar',
-                yAxisID: 'yGeneration',
-                order: 3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            scales: {
-                yCapacity: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    title: { display: true, text: '설치용량 (kW)' }
+    <script>
+        const chartData = {
+            trends: {
+                labels: [2020, 2021, 2022, 2023, 2024],
+                capacity: {
+                    wind: [1305417, 1420177, 1232729, 1306129, 1440782],
+                    solar: [880499, 1044028, 1249357, 1471156, 2512189],
                 },
-                yGeneration: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: { display: true, text: '발전량 (MWh)' },
-                    grid: { drawOnChartArea: false }
+                generation: {
+                    renewableTotal: [51395893, 43096000, 54101000, 56562000, 63192561],
                 }
             },
-            plugins: tooltipPlugin
-        }
-    });
-
-    const windBarCtx = document.getElementById('windBarChart').getContext('2d');
-    new Chart(windBarCtx, {
-        type: 'bar',
-        data: {
-            labels: chartData.regionalWind.labels,
-            datasets: [{
-                label: '설치용량 (kW)',
-                data: chartData.regionalWind.data,
-                backgroundColor: '#94D2BD',
-                borderColor: '#0A9396',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: tooltipPlugin
-        }
-    });
-
-    const solarBarCtx = document.getElementById('solarBarChart').getContext('2d');
-    new Chart(solarBarCtx, {
-        type: 'bar',
-        data: {
-            labels: chartData.regionalSolar.labels,
-            datasets: [{
-                label: '설치용량 (kW)',
-                data: chartData.regionalSolar.data,
-                backgroundColor: '#E9D8A6',
-                borderColor: '#EE9B00',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: tooltipPlugin
-        }
-    });
-    
-    const windTop3Sum = chartData.regionalWind.data.slice(0, 3).reduce((a, b) => a + b, 0);
-    const windTotal = chartData.regionalWind.data.reduce((a, b) => a + b, 0); 
-    const windDonutCtx = document.getElementById('windDonutChart').getContext('2d');
-    new Chart(windDonutCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['상위 3개 지역', '기타 지역'],
-            datasets: [{
-                data: [windTop3Sum, windTotal - windTop3Sum],
-                backgroundColor: ['#0A9396', '#94D2BD'],
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom' },
-                ...tooltipPlugin
+            regionalWind: {
+                labels: ['경상북도', '경상남도', '제주', '강원', '전남', '충남', '전북', '경기', '충북'],
+                data: [288095, 198395, 153680, 140782, 128543, 85721, 65983, 35210, 21876]
+            },
+            regionalSolar: {
+                labels: ['충청남도', '경상북도', '전라북도', '전라남도', '강원', '경기도', '충청북도', '경상남도', '대전'],
+                data: [757860, 512504, 486012, 382191, 380091, 257401, 201278, 178023, 134298]
             }
-        }
-    });
+        };
 
-    const solarTop3Sum = chartData.regionalSolar.data.slice(0, 3).reduce((a, b) => a + b, 0);
-    const solarTotal = chartData.regionalSolar.data.reduce((a, b) => a + b, 0);
-    const solarDonutCtx = document.getElementById('solarDonutChart').getContext('2d');
-    new Chart(solarDonutCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['상위 3개 지역', '기타 지역'],
-            datasets: [{
-                data: [solarTop3Sum, solarTotal - solarTop3Sum],
-                backgroundColor: ['#EE9B00', '#E9D8A6'],
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom' },
-                ...tooltipPlugin
+        const tooltipPluginConfig = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        }
+                        return label;
+                    }
+                }
             }
-        }
-    });
-};
-</script>
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+            new Chart(trendsCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.trends.labels,
+                    datasets: [{
+                        label: '신재생에너지 총 발전량(MWh)',
+                        data: chartData.trends.generation.renewableTotal,
+                        backgroundColor: '#adb5bd',
+                        borderColor: '#adb5bd',
+                        yAxisID: 'yGeneration',
+                        order: 3
+                    }, {
+                        label: '풍력 설치용량(kW)',
+                        data: chartData.trends.capacity.wind,
+                        borderColor: '#343a40',
+                        backgroundColor: '#343a40',
+                        type: 'line',
+                        yAxisID: 'yCapacity',
+                        tension: 0.3,
+                    }, {
+                        label: '태양광 설치용량(kW)',
+                        data: chartData.trends.capacity.solar,
+                        borderColor: '#6c757d',
+                        backgroundColor: '#6c757d',
+                        type: 'line',
+                        yAxisID: 'yCapacity',
+                        tension: 0.3,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        yCapacity: { type: 'linear', display: true, position: 'left', title: { display: true, text: '설치용량 (kW)' } },
+                        yGeneration: { type: 'linear', display: true, position: 'right', title: { display: true, text: '발전량 (MWh)' }, grid: { drawOnChartArea: false } }
+                    },
+                    plugins: tooltipPluginConfig
+                }
+            });
+
+            const windBarCtx = document.getElementById('windBarChart').getContext('2d');
+            new Chart(windBarCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.regionalWind.labels,
+                    datasets: [{
+                        label: '설치용량 (kW)',
+                        data: chartData.regionalWind.data,
+                        backgroundColor: '#adb5bd',
+                        borderColor: '#adb5bd',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, ...tooltipPluginConfig }
+                }
+            });
+
+            const solarBarCtx = document.getElementById('solarBarChart').getContext('2d');
+            new Chart(solarBarCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.regionalSolar.labels,
+                    datasets: [{
+                        label: '설치용량 (kW)',
+                        data: chartData.regionalSolar.data,
+                        backgroundColor: '#adb5bd',
+                        borderColor: '#adb5bd',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, ...tooltipPluginConfig }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
